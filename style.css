@@ -62,6 +62,13 @@ body {
     color: #444;
 }
 
+#high-score {
+    margin-top: 20px;
+    font-size: 24px;
+    font-weight: bold;
+    color: #444;
+}
+
 /* Keyframe animations */
 @keyframes fadeIn {
     from {
@@ -97,3 +104,32 @@ body {
     font-size: 24px;
     font-weight: bold;
 }
+
+/* Pause/Resume Button Styles */
+#pause-button {
+    position: fixed; /* Fixed position to stay in the bottom-right */
+    bottom: 20px; /* Distance from the bottom */
+    right: 200px; /* Distance from the right */
+    background-color: #ff9800; /* Button background color */
+    color: white; /* Button text color */
+    border: none; /* Remove default border */
+    border-radius: 10px; /* Rounded corners */
+    padding: 10px 20px; /* Button padding */
+    font-size: 16px; /* Text size */
+    cursor: pointer; /* Pointer cursor on hover */
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1); /* Subtle shadow */
+    transition: background-color 0.3s ease, transform 0.2s ease; /* Smooth transitions */
+}
+
+/* Hover Effect */
+#pause-button:hover {
+    background-color: #f57c00; /* Slightly darker shade */
+    transform: scale(1.05); /* Slightly larger on hover */
+}
+
+/* Active Effect (when clicked) */
+#pause-button:active {
+    background-color: #e65100; /* Even darker shade */
+    transform: scale(0.95); /* Slightly smaller on click */
+}
+
