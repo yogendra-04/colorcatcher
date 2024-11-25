@@ -106,10 +106,11 @@ body {
 }
 
 /* Pause/Resume Button Styles */
+/* Pause/Resume Button Styles */
 #pause-button {
-    position: fixed; /* Fixed position to stay in the bottom-right */
-    bottom: 20px; /* Distance from the bottom */
-    right: 200px; /* Distance from the right */
+    position: relative; /* Position relative to its container */
+    margin: 20px auto 0; /* Center horizontally and add margin to the top */
+    display: block; /* Make it a block element for centering */
     background-color: #ff9800; /* Button background color */
     color: white; /* Button text color */
     border: none; /* Remove default border */
@@ -132,4 +133,5 @@ body {
     background-color: #e65100; /* Even darker shade */
     transform: scale(0.95); /* Slightly smaller on click */
 }
+
 
