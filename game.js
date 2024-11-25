@@ -2,11 +2,15 @@
 const grid = document.getElementById("grid");
 const targetColorDisplay = document.getElementById("target");
 const scoreDisplay = document.getElementById("score-value");
+const highScoreDisplay = document.getElementById("high-score-value");
+const pauseButton = document.getElementById("pause-button"); // Pause button
 
 // Game Variables
 let targetColor = "";
 let score = 0;
+let highScore = localStorage.getItem("highScore") || 0;
 let gameInterval = null;
+let isPaused = false; // Track if the game is paused
 
 // Colors for the grid
 const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
@@ -14,13 +18,16 @@ const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
 // Initialize Game
 function startGame() {
     resetGame(); // Reset variables and UI
+    updateHighScoreDisplay(); // Display current high score
     setNewTargetColor();
     gameInterval = setInterval(renderGrid, 1500); // Update grid every 1.5 seconds
+    pauseButton.textContent = "Pause"; // Set pause button text
+    isPaused = false; // Game starts unpaused
 }
 
 // Reset the game variables and UI
 function resetGame() {
-    clearExistingIntervals(); // Stop any ongoing intervals
+    clearExistingIntervals();
     score = 0;
     scoreDisplay.textContent = score;
     grid.innerHTML = ""; // Clear the grid
@@ -36,6 +43,8 @@ function setNewTargetColor() {
 
 // Render the grid with random colors
 function renderGrid() {
+    if (isPaused) return; // Don't render if the game is paused
+
     grid.innerHTML = ""; // Clear the grid
     for (let i = 0; i < 16; i++) {
         const square = document.createElement("div");
@@ -68,13 +77,42 @@ function updateScore(newScore) {
     scoreDisplay.classList.add("pulse");
 }
 
+// Update the high score
+function updateHighScore() {
+    if (score > highScore) {
+        highScore = score;
+        localStorage.setItem("highScore", highScore); // Save high score to localStorage
+        updateHighScoreDisplay(); // Update the display
+    }
+}
+
+// Display the high score
+function updateHighScoreDisplay() {
+    highScoreDisplay.textContent = highScore;
+}
+
+// Pause or Resume the game
+function togglePauseGame() {
+    isPaused = !isPaused;
+    pauseButton.textContent = isPaused ? "Resume" : "Pause";
+
+    if (!isPaused) {
+        // If resuming, restart the grid updates
+        gameInterval = setInterval(renderGrid, 1500);
+    } else {
+        // If pausing, clear the interval
+        clearExistingIntervals();
+    }
+}
+
 // End the game
 function endGame() {
     clearExistingIntervals(); // Stop grid updates
+    updateHighScore(); // Check and update the high score
     alert(`Game Over! Your final score is: ${score}`);
-
-    // Display "Game Over" and reset UI
-    grid.innerHTML = ""; // Clear the grid
+    
+    // Reset UI
+    grid.innerHTML = "";
     targetColorDisplay.textContent = "Game Over";
 
     // Restart the game after a delay
@@ -88,3 +126,6 @@ function clearExistingIntervals() {
 
 // Start the game when the page loads
 startGame();
+
+// Add event listener for pause button
+pauseButton.addEventListener("click", togglePauseGame);
