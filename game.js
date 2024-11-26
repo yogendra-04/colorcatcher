@@ -6,6 +6,7 @@ const highScoreDisplay = document.getElementById("high-score-value");
 const pauseButton = document.getElementById("pause-button"); // Pause button
 const gameOverOverlay = document.getElementById("game-over");
 const restartButton = document.getElementById("restart-button");
+const difficultyButton = document.getElementById("difficulty-button"); // Difficulty button
 
 // Game Variables
 let targetColor = "";
@@ -13,6 +14,7 @@ let score = 0;
 let highScore = localStorage.getItem("highScore") || 0;
 let gameInterval = null;
 let isPaused = false; // Track if the game is paused
+let isDifficult = false; // Track difficulty level
 
 // Colors for the grid
 const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
@@ -39,9 +41,20 @@ function resetGame() {
 
 // Set a new target color
 function setNewTargetColor() {
-    targetColor = colors[Math.floor(Math.random() * colors.length)];
-    targetColorDisplay.textContent = targetColor;
-    targetColorDisplay.style.color = targetColor;
+    if (!isDifficult) {
+        // Easy mode: Target color matches the name
+        targetColor = colors[Math.floor(Math.random() * colors.length)];
+        targetColorDisplay.textContent = targetColor;
+        targetColorDisplay.style.color = targetColor;
+    } else {
+        // Difficult mode: Target color name and its text color are different
+        const colorIndex = Math.floor(Math.random() * colors.length);
+        const nameIndex = (colorIndex + Math.floor(Math.random() * (colors.length - 1)) + 1) % colors.length;
+
+        targetColor = colors[colorIndex]; // Actual target color
+        targetColorDisplay.textContent = colors[nameIndex]; // Display a mismatched name
+        targetColorDisplay.style.color = colors[colorIndex]; // Text color matches the target color
+    }
 }
 
 // Render the grid with random colors
@@ -113,6 +126,13 @@ function togglePauseGame() {
     }
 }
 
+// Toggle Difficulty
+function toggleDifficulty() {
+    isDifficult = !isDifficult;
+    difficultyButton.textContent = isDifficult ? "Switch to Easy" : "Switch to Difficult";
+    setNewTargetColor(); // Refresh the target color immediately
+}
+
 // End the game
 function endGame() {
     clearExistingIntervals(); // Stop grid updates
@@ -134,3 +154,4 @@ startGame();
 // Add event listeners
 pauseButton.addEventListener("click", togglePauseGame);
 restartButton.addEventListener("click", startGame);
+difficultyButton.addEventListener("click", toggleDifficulty);
