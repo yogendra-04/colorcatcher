@@ -2,16 +2,9 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #2e2e2e, #181717);
+    background: linear-gradient(135deg, #e0f7fa, #fce4ec);
     margin: 0;
     padding: 0;
-}
-
-h1 {
-    color: #fdfffd; /* Green color for all h1 headings */
-    font-size: 2.5rem; /* Adjust size if needed */
-    font-weight: bold; /* Keep bold for emphasis */
-    text-align: center; /* Align center for consistency */
 }
 
 /* Game Container */
@@ -19,10 +12,10 @@ h1 {
     margin: 30px auto;
     padding: 20px;
     max-width: 600px;
-    background: #000000;
+    background: #ffffff;
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
-    border: 1px solid #242222;
+    border: 1px solid #e0e0e0;
 
     display: flex; /* Flexbox to center the grid */
     flex-direction: column; /* Stack children vertically */
@@ -226,7 +219,7 @@ h1 {
 }
 
 /* Target Color Section */
-#target-color {
+#target {
     font-size: 20px;
     font-weight: bold;
     color: #333;
