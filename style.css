@@ -1,7 +1,7 @@
 body {
     font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #ffecd2, #fcb69f);
+    background: linear-gradient(135deg, #a2e277, #fcb69f);
     margin: 0;
     padding: 0;
 }
@@ -10,7 +10,7 @@ body {
     margin: 30px auto;
     padding: 20px;
     max-width: 600px;
-    background: white;
+    background: rgb(255, 255, 255);
     border-radius: 10px;
     box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
 }
@@ -41,13 +41,15 @@ body {
 
 /* Smooth scaling on hover */
 .square:hover {
-    transform: scale(1.1);
-    box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.2);
+    transform: scale(1.2); /* Slight zoom */
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3); /* Add shadow effect */
 }
 
-/* Click feedback animation */
+
 .square:active {
-    transform: scale(0.9);
+    transform: scale(0.9); /* Shrink slightly */
+    transition: transform 0.1s ease;
 }
 
 /* Score pulse effect */
@@ -81,6 +83,7 @@ body {
     }
 }
 
+/* Keyframe for score animation */
 @keyframes pulse {
     0% {
         transform: scale(1);
@@ -92,6 +95,25 @@ body {
         transform: scale(1);
     }
 }
+
+/* Apply animation */
+#score-value.pulse {
+    animation: pulse 0.3s ease;
+}
+
+
+@keyframes fadeInScale {
+    0% {
+        opacity: 0;
+        transform: scale(0.5);
+    }
+    100% {
+        opacity: 1;
+        transform: scale(1);
+    }
+}
+
+
 
 #timer {
     font-size: 22px;
@@ -105,7 +127,7 @@ body {
     font-weight: bold;
 }
 
-/* Pause/Resume Button Styles */
+
 /* Pause/Resume Button Styles */
 #pause-button {
     position: relative; /* Position relative to its container */
@@ -132,6 +154,54 @@ body {
 #pause-button:active {
     background-color: #e65100; /* Even darker shade */
     transform: scale(0.95); /* Slightly smaller on click */
+}
+
+/* Game Over Overlay */
+#game-over {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8); /* Dark overlay */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+    z-index: 10;
+}
+
+#game-over.show {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Content inside the overlay */
+#game-over-content {
+    text-align: center;
+    color: #fff;
+}
+
+#game-over-content h1 {
+    font-size: 2.5rem;
+    margin-bottom: 20px;
+}
+
+#restart-button {
+    padding: 10px 20px;
+    font-size: 1rem;
+    color: #fff;
+    background-color: #007bff;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+#restart-button:hover {
+    background-color: #0056b3;
 }
 
 
