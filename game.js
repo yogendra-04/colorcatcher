@@ -4,6 +4,8 @@ const targetColorDisplay = document.getElementById("target");
 const scoreDisplay = document.getElementById("score-value");
 const highScoreDisplay = document.getElementById("high-score-value");
 const pauseButton = document.getElementById("pause-button"); // Pause button
+const gameOverOverlay = document.getElementById("game-over");
+const restartButton = document.getElementById("restart-button");
 
 // Game Variables
 let targetColor = "";
@@ -23,6 +25,7 @@ function startGame() {
     gameInterval = setInterval(renderGrid, 1500); // Update grid every 1.5 seconds
     pauseButton.textContent = "Pause"; // Set pause button text
     isPaused = false; // Game starts unpaused
+    gameOverOverlay.classList.remove("show"); // Hide Game Over overlay
 }
 
 // Reset the game variables and UI
@@ -53,16 +56,21 @@ function renderGrid() {
         square.style.backgroundColor = randomColor;
 
         // Add click event
-        square.addEventListener("click", () => {
-            if (square.style.backgroundColor === targetColor) {
-                updateScore(score + 1); // Update the score
-                setNewTargetColor(); // Set a new target color
-            } else {
-                endGame(); // End game on wrong click
-            }
-        });
+        square.addEventListener("click", (event) => handleSquareClick(event, randomColor));
 
         grid.appendChild(square);
+    }
+}
+
+// Handle square clicks
+function handleSquareClick(event, color) {
+    if (isPaused) return; // Ignore clicks when the game is paused
+
+    if (color === targetColor) {
+        updateScore(score + 1); // Update the score
+        setNewTargetColor(); // Set a new target color
+    } else {
+        endGame(); // End game on wrong click
     }
 }
 
@@ -109,14 +117,10 @@ function togglePauseGame() {
 function endGame() {
     clearExistingIntervals(); // Stop grid updates
     updateHighScore(); // Check and update the high score
-    alert(`Game Over! Your final score is: ${score}`);
-    
-    // Reset UI
-    grid.innerHTML = "";
-    targetColorDisplay.textContent = "Game Over";
 
-    // Restart the game after a delay
-    setTimeout(() => startGame(), 2000);
+    // Show the Game Over overlay
+    document.getElementById("final-score").textContent = score;
+    gameOverOverlay.classList.add("show");
 }
 
 // Clear all intervals
@@ -127,5 +131,6 @@ function clearExistingIntervals() {
 // Start the game when the page loads
 startGame();
 
-// Add event listener for pause button
+// Add event listeners
 pauseButton.addEventListener("click", togglePauseGame);
+restartButton.addEventListener("click", startGame);
