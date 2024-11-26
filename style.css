@@ -146,3 +146,99 @@ body {
         transform: scale(1);
     }
 }
+
+/* Difficulty Button */
+#difficulty-button {
+    margin-top: 10px;
+    background-color: #28a745;
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+}
+
+#difficulty-button:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+#difficulty-button:active {
+    background-color: #1e7e34;
+    transform: scale(0.95);
+}
+
+/* Game Header */
+#game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: right;
+    margin-bottom: 20px;
+    padding: 10px 20px;
+    background: rgba(255, 255, 255, 0.8); /* Subtle background for contrast */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Target Color Section */
+#target {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Scores Section */
+#scores {
+    text-align: right;
+}
+
+#scores div {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+/* High Score and Current Score Alignment */
+#high-score {
+    margin-top: 5px; /* Space between score and high score */
+}
+
+/* Game Header */
+#game-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 20px;
+    padding: 10px;
+    background: rgba(255, 255, 255, 0.8); /* Subtle background */
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.15);
+}
+
+/* Target Color Section */
+#target-color {
+    font-size: 20px;
+    font-weight: bold;
+    color: #333;
+}
+
+/* Scores Container */
+#scores-container {
+    display: flex;
+    flex-direction: column; /* Stack scores vertically */
+    align-items: flex-end; /* Align scores to the right */
+    gap: 5px; /* Space between Score and High Score */
+}
+
+/* Scores */
+#score, #high-score {
+    font-size: 18px;
+    font-weight: bold;
+    color: #555;
+}
+
+
+
