@@ -1,13 +1,13 @@
 /* General Styles */
 body {
-    font-family: 'Roboto', Arial, sans-serif;
+    font-family: Arial, sans-serif;
     text-align: center;
-    background: linear-gradient(135deg, #e8f6f3, #f6e6e8);
+    background: linear-gradient(135deg, #e0f7fa, #fce4ec);
     margin: 0;
     padding: 0;
-    color: #333;
 }
 
+/* Game Container */
 #game-container {
     margin: 30px auto;
     padding: 20px;
@@ -16,110 +16,81 @@ body {
     border-radius: 15px;
     box-shadow: 0 6px 15px rgba(0, 0, 0, 0.1);
     border: 1px solid #e0e0e0;
+
+    display: flex; /* Flexbox to center the grid */
+    flex-direction: column; /* Stack children vertically */
+    align-items: center; /* Center horizontally */
+    justify-content: center; /* Center vertically */
+    min-height: 500px; /* Ensure sufficient height for centering */
 }
 
+/* Target Color Display */
 #target-color {
-    font-size: 32px;
+    font-size: 28px;
     margin-bottom: 20px;
     font-weight: bold;
-    color: #4a4a4a;
-    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.1);
+    color: #444;
 }
 
+/* Grid Styles */
 #grid {
     display: grid;
     grid-template-columns: repeat(4, 1fr);
     gap: 15px;
-    margin: 20px auto;
     justify-content: center;
+    align-items: center;
+    margin: 0;
 }
 
 .square {
     width: 60px;
     height: 60px;
-    border-radius: 10px;
+    border-radius: 8px;
     cursor: pointer;
     opacity: 0; /* Initial hidden state */
-    animation: fadeInScale 0.6s ease-in-out forwards; /* Smooth fade-in */
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: transform 0.2s ease, box-shadow 0.3s ease, filter 0.3s ease;
+    animation: fadeIn 0.5s ease-in forwards; /* Smooth fade-in */
+    transition: transform 0.2s, box-shadow 0.2s;
 }
 
-/* Subtle Glow on Hover */
 .square:hover {
-    transform: scale(1.1);
-    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.2);
-    filter: brightness(1.1);
+    transform: scale(1.2);
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
-/* Active Effect */
 .square:active {
     transform: scale(0.9);
     transition: transform 0.1s ease;
-    filter: brightness(0.9);
 }
 
-/* Score Styles */
+/* Score */
 #score, #high-score {
     margin-top: 20px;
     font-size: 24px;
     font-weight: bold;
-    color: #5a5a5a;
-    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+    color: #444;
 }
 
-#score-value, #high-score-value {
-    animation: pulse 0.3s ease-in-out;
-}
-
-/* Animation Keyframes */
-@keyframes fadeInScale {
-    from {
-        opacity: 0;
-        transform: scale(0.8);
-    }
-    to {
-        opacity: 1;
-        transform: scale(1);
-    }
-}
-
-@keyframes pulse {
-    0% {
-        transform: scale(1);
-    }
-    50% {
-        transform: scale(1.2);
-    }
-    100% {
-        transform: scale(1);
-    }
-}
-
-/* Pause/Resume Button */
+/* Button */
 #pause-button {
-    margin: 20px auto 0;
-    display: block;
-    background-color: #4caf50;
+    margin-top: 20px;
+    background-color: #ff9800;
     color: white;
     border: none;
-    border-radius: 12px;
-    padding: 12px 24px;
+    border-radius: 10px;
+    padding: 10px 20px;
     font-size: 16px;
     cursor: pointer;
-    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
-/* Hover Effect for Button */
 #pause-button:hover {
-    background-color: #43a047;
+    background-color: #f57c00;
     transform: scale(1.05);
 }
 
-/* Active Effect for Button */
 #pause-button:active {
-    background-color: #388e3c;
+    background-color: #e65100;
     transform: scale(0.95);
 }
 
@@ -130,7 +101,7 @@ body {
     left: 0;
     width: 100%;
     height: 100%;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.8);
     display: flex;
     align-items: center;
     justify-content: center;
@@ -145,47 +116,33 @@ body {
     visibility: visible;
 }
 
-/* Content Inside Overlay */
-#game-over-content {
-    text-align: center;
-    color: #fff;
-    background: #2c3e50;
-    padding: 30px;
-    border-radius: 10px;
-    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.3);
-}
-
 #game-over-content h1 {
     font-size: 2.5rem;
-    margin-bottom: 20px;
-    color: #ecf0f1;
+    color: #fff;
 }
 
 #restart-button {
-    padding: 12px 24px;
+    padding: 10px 20px;
     font-size: 1rem;
     color: #fff;
-    background-color: #3498db;
+    background-color: #007bff;
     border: none;
-    border-radius: 8px;
+    border-radius: 5px;
     cursor: pointer;
-    transition: background-color 0.3s ease, transform 0.2s ease;
 }
 
 #restart-button:hover {
-    background-color: #2980b9;
-    transform: scale(1.05);
+    background-color: #0056b3;
 }
 
-/* Timer Display */
-#timer {
-    font-size: 22px;
-    margin-bottom: 10px;
-    color: #e74c3c;
-    font-weight: bold;
-}
-
-#time-value {
-    font-size: 24px;
-    font-weight: bold;
+/* Keyframe Animations */
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: scale(0.8);
+    }
+    to {
+        opacity: 1;
+        transform: scale(1);
+    }
 }
