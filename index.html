@@ -7,23 +7,40 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
+       
     <div id="game-container">
         <h1>Color Catcher</h1>
-        <div id="target-color">Target Color: <span id="target"></span></div>
+        <div id="game-header">
+            <div id="target-color">
+                Target Color: <span id="target"></span>
+            </div>
+            <div id="scores-container">
+                <div id="score">Score: <span id="score-value">0</span></div>
+                <div id="high-score">High Score: <span id="high-score-value">0</span></div>
+            </div>
+        </div>
+        
+        
         <div id="grid"></div>
-        <div id="score">Score: <span id="score-value">0</span></div>
-        <div id="high-score">High Score: <span id="high-score-value">0</span></div>
-        <div><button id="pause-button">Pause</button></div>
+
+        <div id="controls">
+            <button id="pause-button">Pause</button>
+            <button id="difficulty-button">Difficult</button>
+        </div>
+
+        
     </div>    
 
     <div id="game-over">
-        <div id="game-over-content">
-            <h1>Game Over</h1>
-            <p>Your Score: <span id="final-score">0</span></p>
-            <button id="restart-button">Restart</button>
-        </div>
+    <div id="game-over-content">
+        <h1>Game Over</h1>
+        <p>Your Score: <span id="final-score">0</span></p>
+        <button id="restart-button">Restart</button>
     </div>
+
     
+</div>
+
     <script src="game.js"></script>
 </body>
 </html>
