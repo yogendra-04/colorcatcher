@@ -6,7 +6,7 @@ const highScoreDisplay = document.getElementById("high-score-value");
 const pauseButton = document.getElementById("pause-button"); // Pause button
 const gameOverOverlay = document.getElementById("game-over");
 const restartButton = document.getElementById("restart-button");
-const difficultyButton = document.getElementById("difficulty-button"); // Difficulty button
+const difficultyDropdown = document.getElementById("difficulty-dropdown"); // Difficulty dropdown
 
 // Game Variables
 let targetColor = "";
@@ -14,7 +14,8 @@ let score = 0;
 let highScore = localStorage.getItem("highScore") || 0;
 let gameInterval = null;
 let isPaused = false; // Track if the game is paused
-let isDifficult = false; // Track difficulty level
+let isDifficult = false; // Track difficult mode
+let isBabyMode = false; // Track Baby mode
 
 // Colors for the grid
 const colors = ["red", "blue", "green", "yellow", "purple", "orange"];
@@ -24,7 +25,7 @@ function startGame() {
     resetGame(); // Reset variables and UI
     updateHighScoreDisplay(); // Display current high score
     setNewTargetColor();
-    gameInterval = setInterval(renderGrid, 1500); // Update grid every 1.5 seconds
+    gameInterval = setInterval(renderGrid, isBabyMode ? 5000 : 1500); // Update grid based on mode
     pauseButton.textContent = "Pause"; // Set pause button text
     isPaused = false; // Game starts unpaused
     gameOverOverlay.classList.remove("show"); // Hide Game Over overlay
@@ -82,6 +83,7 @@ function handleSquareClick(event, color) {
     if (color === targetColor) {
         updateScore(score + 1); // Update the score
         setNewTargetColor(); // Set a new target color
+        renderGrid(); // Immediately update the grid
     } else {
         endGame(); // End game on wrong click
     }
@@ -119,18 +121,31 @@ function togglePauseGame() {
 
     if (!isPaused) {
         // If resuming, restart the grid updates
-        gameInterval = setInterval(renderGrid, 1500);
+        gameInterval = setInterval(renderGrid, isBabyMode ? 5000 : 1500);
     } else {
         // If pausing, clear the interval
         clearExistingIntervals();
     }
 }
 
-// Toggle Difficulty
-function toggleDifficulty() {
-    isDifficult = !isDifficult;
-    difficultyButton.textContent = isDifficult ? "Switch to Easy" : "Switch to Difficult";
-    setNewTargetColor(); // Refresh the target color immediately
+// Handle Difficulty Change from Dropdown
+function handleDifficultyChange() {
+    const selectedValue = difficultyDropdown.value;
+
+    if (selectedValue === "easy") {
+        isDifficult = false;
+        isBabyMode = false;
+    } else if (selectedValue === "difficult") {
+        isDifficult = true;
+        isBabyMode = false;
+    } else if (selectedValue === "baby") {
+        isBabyMode = true;
+        isDifficult = false;
+    }
+
+    clearExistingIntervals();
+    gameInterval = setInterval(renderGrid, isBabyMode ? 5000 : 1500);
+    setNewTargetColor();
 }
 
 // End the game
@@ -154,4 +169,4 @@ startGame();
 // Add event listeners
 pauseButton.addEventListener("click", togglePauseGame);
 restartButton.addEventListener("click", startGame);
-difficultyButton.addEventListener("click", toggleDifficulty);
+difficultyDropdown.addEventListener("change", handleDifficultyChange);
