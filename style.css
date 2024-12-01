@@ -147,29 +147,6 @@ body {
     }
 }
 
-/* Difficulty Button */
-#difficulty-button {
-    margin-top: 10px;
-    background-color: #28a745;
-    color: white;
-    border: none;
-    border-radius: 10px;
-    padding: 10px 20px;
-    font-size: 16px;
-    cursor: pointer;
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    transition: background-color 0.3s ease, transform 0.2s ease;
-}
-
-#difficulty-button:hover {
-    background-color: #218838;
-    transform: scale(1.05);
-}
-
-#difficulty-button:active {
-    background-color: #1e7e34;
-    transform: scale(0.95);
-}
 
 /* Game Header */
 #game-header {
@@ -240,5 +217,45 @@ body {
     color: #555;
 }
 
+/* Difficulty Dropdown */
+#difficulty-dropdown {
+    margin-top: 10px;
+    background-color: #28a745; /* Matches the previous button color */
+    color: white;
+    border: none;
+    border-radius: 10px;
+    padding: 10px 20px;
+    font-size: 16px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: background-color 0.3s ease, transform 0.2s ease;
+    appearance: none; /* Removes default dropdown styling for consistency */
+}
 
+/* Add dropdown arrow customization */
+#difficulty-dropdown::-ms-expand {
+    display: none; /* Hides default arrow on IE/Edge */
+}
 
+#difficulty-dropdown:focus {
+    outline: none;
+    border: 2px solid #1e7e34; /* Highlight border on focus */
+}
+
+/* Hover and Active Styles */
+#difficulty-dropdown:hover {
+    background-color: #218838;
+    transform: scale(1.05);
+}
+
+#difficulty-dropdown:active {
+    background-color: #1e7e34;
+    transform: scale(0.95);
+}
+
+/* Dropdown Options */
+#difficulty-dropdown option {
+    background-color: #ffffff;
+    color: #333;
+    font-size: 16px;
+}
